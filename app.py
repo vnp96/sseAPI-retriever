@@ -1,7 +1,7 @@
 import os
 from datetime import datetime
 
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, jsonify
 import requests
 
 app = Flask(__name__)
@@ -40,7 +40,8 @@ def filter_json():
     ts = int(request.form.get("date-time"))
     year = datetime.utcfromtimestamp(ts).strftime('%Y')
     url = fqdn + "/api" + "?before_year=" + year
-    return requests.get(url)
+    print(url)
+    return requests.get(url).json()
 
 
 
